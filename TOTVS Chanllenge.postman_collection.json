@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "0ea59555-aadd-4b8a-bea2-9e0b56358162",
+		"name": "TOTVS Chanllenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11309720"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "CreateAccount",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dueDate\": \"2025-02-05\",\n    \"paymentDate\": \"2025-02-05\",\n    \"value\": 200.0,\n    \"description\": \"Conta de luz\",\n    \"situation\": \"PENDING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/account/v1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account By File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/rodrigo-oliveira-de-almeida/Documentos/Desenvolvimento/Desafios/Totvs/desafio/src/main/resources/contas.csv"
+								}
+							],
+							"options": {
+								"formdata": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/account/v1/by-file"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dueDate\": \"2025-01-06\",\n    \"paymentDate\": \"2025-01-06\",\n    \"value\": 250.0,\n    \"description\": \"Internet\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/account/v1/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account Situation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dueDate\": \"2025-01-06\",\n    \"paymentDate\": \"2025-01-06\",\n    \"value\": 250.0,\n    \"description\": \"Internet\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/account/v1/1/situation/canceled"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/account/v1/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account By Due Date And Description",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/account/v1/due-date-description?dueDate=2025-01-06&description=Internet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"v1",
+								"due-date-description"
+							],
+							"query": [
+								{
+									"key": "dueDate",
+									"value": "2025-01-06"
+								},
+								{
+									"key": "description",
+									"value": "Internet"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Total Paid Per Period",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/account/v1/total-paid-per-period?startDate=2025-01-04&endDate=2025-01-08",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"v1",
+								"total-paid-per-period"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-01-04"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-01-08"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(responseCode.code >= 200 && responseCode.code <= 299) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"",
+									"    postman.setEnvironmentVariable('accessToken', jsonData.accessToken);",
+									"    postman.setEnvironmentVariable('refreshToken', jsonData.refreshToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/auth/signin"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
