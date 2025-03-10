@@ -97,13 +97,13 @@
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone [https://link-para-o-projeto](https://github.com/rdgoliveiraa/desafio-TOTVS)
 ```
 
 Entre no diretório do projeto
 
 ```bash
-  cd desafio
+  cd desafio-TOTVS
 ```
 
 Inicie os contêineres
