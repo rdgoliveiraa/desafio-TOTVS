@@ -105,6 +105,11 @@ Entre no diretório do projeto
 ```bash
   cd desafio-TOTVS
 ```
+Gere o jar
+
+```bash
+  mvn clean package
+```
 
 Inicie os contêineres
 
